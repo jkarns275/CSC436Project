@@ -4,6 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Data {
   public static final int SPEED_LIMIT = 196;
+  public static final float TICKS_TO_CM = 1f/18f;
 
   private final static Data instance = new Data();
 
@@ -29,55 +30,64 @@ public class Data {
 
   public static Data getInstanace() { return Data.instance; }
 
-  public Data update() {
+  public Data update(float dt, float targetSpeed) throws BadSensorValueException {
+    lastUssValue = ussValue;
+    ussValue = uss.read();
+
+    lastLeftEncoderValue = leftEncoderValue;
+    leftEncoderValue = leftEncoder.readEncoderValue();
+
+    lastRightEncoderValue = rightEncoderValue;
+    rightEncoderValue = rightEncoder.readEncoderValue();
+
     // Calculate new values
     this.leftSCMD = this.updateLeftSCMD();
     this.rightSCMD = this.updateRightSCMD();
-    this.rightRotationalSpeed = this.updateRightRotationalSpeed();
-    this.leftRotationalSpeed = this.updateLeftRotationalSpeed();
-    this.relativeSpeed = this.updateRelativeSpeed();
-    this.rightSteeringCorrectionAverage = this.updateRightSteeringCorrection();
-    this.rightSteeringCorrection  = this.updateRightSteeringCorrection();
-    this.leftSteeringCorrection = this.updateLeftSteeringCorrection();
+    this.rightRotationalSpeed = this.updateRightRotationalSpeed(dt);
+    this.leftRotationalSpeed = this.updateLeftRotationalSpeed(dt);
+    this.relativeSpeed = this.updateRelativeSpeed(dt);
+    this.rightSteeringCorrection  = this.updateRightSteeringCorrection(targetSpeed);
+    this.leftSteeringCorrection = this.updateLeftSteeringCorrection(targetSpeed);
     return this;
   }
 
-  private float updateRelativeSpeed() {
-    return 0;
+  private float updateRelativeSpeed(float dt) {
+    float difference = ussValue - lastUssValue;
+    return difference / dt;
   }
 
   private float updateLeftSCMD() {
-    return 0;
+    return (leftEncoderValue - lastLeftEncoderValue) * TICKS_TO_CM;
   }
 
   private float updateRightSCMD() {
-    return 0;
+    return (rightEncoderValue - lastRightEncoderValue) * TICKS_TO_CM;
   }
 
-  private float updateLeftRotationalSpeed() {
-    return 0;
+  private float updateLeftRotationalSpeed(float dt) {
+    return this.getLeftSCMD() / dt;
   }
 
-  private float updateRightRotationalSpeed() {
-    return 0;
+  private float updateRightRotationalSpeed(float dt) {
+    return this.getRightSCMD() / dt;
   }
 
-  private float updateRightSteeringCorrection() {
-    float calculatedValue = throw new NotImplementedException();
+  private float updateRightSteeringCorrection(float targetSpeed) {
+    float calculatedValue = 1.0f + (targetSpeed - rightRotationalSpeed) / targetSpeed;
     return updateRightSteeringCorrectionAverage(calculatedValue);
   }
 
   private float updateRightSteeringCorrectionAverage(float newValue) {
-    throw new NotImplementedException();
+    return (1f/16f) * newValue + (15f/16f) * rightSteeringCorrectionAverage;
   }
 
-  private float updateLeftSteeringCorrection() {
-    float calculatedValue = throw new NotImplementedException();
+  private float updateLeftSteeringCorrection(float  targetSpeed) {
+    float calculatedValue = 1.0f + (targetSpeed - leftRotationalSpeed) / targetSpeed;
     return updateLeftSteeringCorrectionAverage(calculatedValue);
   }
 
   private float updateLeftSteeringCorrectionAverage(float newValue) {
-    throw new NotImplementedException();
+    return (1f/16f) * newValue + (15f/16f) * leftSteeringCorrectionAverage;
   }
 
   private float updateRightSteeringCorrectionAverage() {

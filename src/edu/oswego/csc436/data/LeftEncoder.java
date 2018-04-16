@@ -13,8 +13,6 @@ public class LeftEncoder extends Encoder {
   }
 
   @Override
-  public int getID() {
-    throw new NotImplementedException();
-  }
+  public int getID() { return 0; }
 
 }

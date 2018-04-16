@@ -11,7 +11,7 @@ public class UltraSonicSensor {
     return instance;
   }
 
-  public int read() {
+  public int read() throws BadSensorValueException {
     throw new NotImplementedException();
   }
 }

@@ -6,7 +6,7 @@ public abstract class Encoder {
 
   public abstract int getID();
 
-  public int readEncoderValue() {
+  public int readEncoderValue() throws BadSensorValueException {
     int id = getID();
 
     throw new NotImplementedException();
