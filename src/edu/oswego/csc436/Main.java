@@ -11,7 +11,18 @@ public class Main {
   private State state = new Leader();
   private long lastTime = System.nanoTime();
 
-  public static void main(String[] args) { Main.instance.run(args); }
+  public static void main(String[] args) {
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        System.out.println("Running shutdown hook.");
+        System.out.println("Stopping vehicle.");
+        LeftEncoder.getInstance().writeEncoderValue(0);
+        RightEncoder.getInstance().writeEncoderValue(0);
+      }
+    });
+    Main.instance.run(args);
+  }
 
   private float getDT() {
     long time = System.nanoTime();

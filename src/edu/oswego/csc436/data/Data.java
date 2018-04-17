@@ -7,7 +7,16 @@ public class Data {
   public final LeftEncoder leftEncoder = LeftEncoder.getInstance();
   public final RightEncoder rightEncoder = RightEncoder.getInstance();
 
-  Data() {}
+  private int ussValue = 0, lastUssValue = 0;
+  private int leftEncoderValue = 0, lastLeftEncoderValue = 0;
+  private int rightEncoderValue = 0, lastRightEncoderValue = 0;
+
+  Data() { }
 
   public static Data getInstanace() { return Data.instance; }
+
+  public Data update() {
+    // Calculate new values
+    return this;
+  }
 }

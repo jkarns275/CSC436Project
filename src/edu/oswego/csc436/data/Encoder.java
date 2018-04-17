@@ -14,7 +14,7 @@ public abstract class Encoder {
     //return id;
   }
 
-  public boolean writeEncoderValue() {
+  public boolean writeEncoderValue(int encoderValue) {
     throw new NotImplementedException();
   }
 }
