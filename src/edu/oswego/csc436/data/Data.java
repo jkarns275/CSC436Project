@@ -5,6 +5,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Data {
   public static final int SPEED_LIMIT = 196;
   public static final float TICKS_TO_CM = 1f/18f;
+  public static final int FOLLOW_DISTANCE = 500; //cm
+  public static final int CRITICAL_DISTANCE = 15; //cm
+  public static final int STOP_DISTANCE = 30; //cm
 
   private final static Data instance = new Data();
 
@@ -96,6 +99,11 @@ public class Data {
 
   private float updateLeftSteeringCorrectionAverage() {
     return leftSteeringCorrectionAverage;
+  }
+
+  public void writeVariables() {
+      leftEncoder.writeEncoderValue(leftSteeringCorrection);
+      rightEncoder.writeEncoderValue(rightSteeringCorrection);
   }
 
   public int getRightEncoderValue() {

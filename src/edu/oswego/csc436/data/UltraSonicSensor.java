@@ -4,6 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class UltraSonicSensor {
   private static UltraSonicSensor instance = new UltraSonicSensor();
+  private final com.dexterind.gopigo.components.UltraSonicSensor uss = new com.dexterind.gopigo.components.UltraSonicSensor();
 
   UltraSonicSensor() {}
 
@@ -12,6 +13,11 @@ public class UltraSonicSensor {
   }
 
   public int read() throws BadSensorValueException {
-    throw new NotImplementedException();
+      int distance = uss.getDistance();
+      if (distance > 0) {
+          return distance;
+      } else {
+          throw new BadSensorValueException("Bad sensor value");
+      }
   }
 }
