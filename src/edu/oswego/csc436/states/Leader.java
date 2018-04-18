@@ -1,5 +1,6 @@
 package edu.oswego.csc436.states;
 
+import edu.oswego.csc436.data.BadSensorValueException;
 import edu.oswego.csc436.data.Data;
 
 public class Leader extends State {
@@ -8,11 +9,11 @@ public class Leader extends State {
       for (;;) {
           try {
               data = data.update(dt, data.SPEED_LIMIT);
-              if (data.getUSSValue() < data.CRITICAL_DISTANCE) {
+              if (data.getUssValue() < data.CRITICAL_DISTANCE) {
                   return new Emergency();
-              } else if (data.getUSSValue() < data.STOP_DISTANCE) {
+              } else if (data.getUssValue() < data.STOP_DISTANCE) {
                   return new Stop();
-              } else if (data.getUSSValue() < data.FOLLOW_DISTANCE) {
+              } else if (data.getUssValue() < data.FOLLOW_DISTANCE) {
                 return new Follow();
               } else {
                   data.writeVariables();

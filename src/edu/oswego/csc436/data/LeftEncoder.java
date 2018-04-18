@@ -1,6 +1,9 @@
 package edu.oswego.csc436.data;
 
+import com.dexterind.gopigo.behaviours.Motion;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.io.IOException;
 
 public class LeftEncoder extends Encoder {
 
@@ -19,7 +22,7 @@ public class LeftEncoder extends Encoder {
   }
 
   @Override
-  public void writeToEncoder(Motion motion, int value) {
-    motion.setLeftSpeed(value);
+  public void writeToEncoder(Motion motion, float value) throws IOException {
+    motion.setLeftSpeed((int) value);
   }
 }

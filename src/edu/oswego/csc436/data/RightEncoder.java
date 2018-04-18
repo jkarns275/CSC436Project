@@ -20,6 +20,6 @@ public class RightEncoder extends Encoder {
 
   @Override
   public void writeToEncoder(Motion motion, int value) {
-    motion.setRightSpeed(value);
+    motion.setRightSpeed((int) value);
   }
 }
