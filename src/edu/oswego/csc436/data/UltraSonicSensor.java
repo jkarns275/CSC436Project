@@ -4,6 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class UltraSonicSensor {
   private static UltraSonicSensor instance = new UltraSonicSensor();
+  private Board board = Board.getInstance();
 
   UltraSonicSensor() {}
 
@@ -12,6 +13,7 @@ public class UltraSonicSensor {
   }
 
   public int read() {
-    throw new NotImplementedException();
+
+
   }
 }

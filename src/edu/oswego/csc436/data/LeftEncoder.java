@@ -5,6 +5,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class LeftEncoder extends Encoder {
 
   private static LeftEncoder instance = new LeftEncoder();
+  private final int encoderID = 0;
 
   LeftEncoder() {}
 
@@ -14,7 +15,11 @@ public class LeftEncoder extends Encoder {
 
   @Override
   public int getID() {
-    throw new NotImplementedException();
+    return encoderID;
   }
 
+  @Override
+  public void writeToEncoder(Motion motion, int value) {
+    motion.setLeftSpeed(value);
+  }
 }

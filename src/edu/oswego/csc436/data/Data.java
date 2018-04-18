@@ -42,20 +42,24 @@ public class Data {
     return this;
   }
 
+  private float upDateUSSValue() {
+    return uss.read();
+  }
+
   private float updateRelativeSpeed() {
-    return 0;
+    return (ussValue - lastUssValue)/;
   }
 
   private float updateLeftSCMD() {
-    return 0;
+    return leftEncoderValue - lastLeftEncoderValue;
   }
 
   private float updateRightSCMD() {
-    return 0;
+    return rightEncoderValue - lastRightEncoderValue;
   }
 
   private float updateLeftRotationalSpeed() {
-    return 0;
+
   }
 
   private float updateRightRotationalSpeed() {
@@ -88,6 +92,9 @@ public class Data {
     return leftSteeringCorrectionAverage;
   }
 
+  /*
+   * Getter and Setter Methods
+   */
   public int getRightEncoderValue() {
     return rightEncoderValue;
   }

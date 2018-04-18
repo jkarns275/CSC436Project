@@ -5,16 +5,16 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public abstract class Encoder {
 
   public abstract int getID();
+  public abstract void writeToEncoder();
+  private Encoders encoders = Encoders.getInstance();
+  private Motion motion = Motion.getInstance();
 
   public int readEncoderValue() {
     int id = getID();
-
-    throw new NotImplementedException();
-
-    //return id;
+    return ecoders.read(id);
   }
 
   public boolean writeEncoderValue(int encoderValue) {
-    throw new NotImplementedException();
+    writeToEncoder(motion,encoderValue);
   }
 }
