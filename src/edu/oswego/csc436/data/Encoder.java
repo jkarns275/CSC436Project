@@ -9,7 +9,7 @@ public abstract class Encoder {
   private Encoders encoders = Encoders.getInstance();
   private Motion motion = Motion.getInstance();
 
-  public int readEncoderValue() {
+  public int readEncoderValue() throws BadSensorValueException {
     int id = getID();
     return ecoders.read(id);
   }
