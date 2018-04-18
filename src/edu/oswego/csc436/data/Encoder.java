@@ -1,7 +1,6 @@
 package edu.oswego.csc436.data;
 
 import com.dexterind.gopigo.behaviours.Motion;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 

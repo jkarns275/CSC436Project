@@ -1,7 +1,5 @@
 package edu.oswego.csc436.data;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.IOException;
 
 public class UltraSonicSensor {
