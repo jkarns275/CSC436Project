@@ -7,10 +7,21 @@ import java.io.IOException;
 
 public class LeftEncoder extends Encoder {
 
-  private static LeftEncoder instance = new LeftEncoder();
+  private static LeftEncoder instance;
+
+  static {
+    try {
+      instance = new LeftEncoder();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   private final int encoderID = 0;
 
-  LeftEncoder() {}
+  LeftEncoder() throws InterruptedException, IOException {}
 
   public static LeftEncoder getInstance() {
     return instance;

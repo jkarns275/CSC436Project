@@ -2,6 +2,8 @@ package edu.oswego.csc436.data;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.IOException;
+
 public class Data {
   public static final int SPEED_LIMIT = 196;
   public static final float TICKS_TO_CM = 1f/18f;
@@ -33,7 +35,7 @@ public class Data {
 
   public static Data getInstanace() { return Data.instance; }
 
-  public Data update(float dt, float targetSpeed) throws BadSensorValueException {
+  public Data update(float dt, float targetSpeed) throws BadSensorValueException, IOException {
     lastUssValue = ussValue;
     ussValue = uss.read();
 
@@ -101,9 +103,9 @@ public class Data {
     return leftSteeringCorrectionAverage;
   }
 
-  public void writeVariables() {
-      leftEncoder.writeEncoderValue(leftSteeringCorrection);
-      rightEncoder.writeEncoderValue(rightSteeringCorrection);
+  public void writeSpeeds() throws IOException {
+      leftEncoder.writeEncoderValue(leftRotationalSpeed);
+      rightEncoder.writeEncoderValue(rightRotationalSpeed);
   }
 
   public int getRightEncoderValue() {

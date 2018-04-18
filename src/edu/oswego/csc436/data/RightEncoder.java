@@ -1,13 +1,27 @@
 package edu.oswego.csc436.data;
 
+import com.dexterind.gopigo.behaviours.Motion;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.io.IOException;
 
 public class RightEncoder extends Encoder {
 
-  private static RightEncoder instance = new RightEncoder();
+  private static RightEncoder instance;
+
+  static {
+    try {
+      instance = new RightEncoder();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   private final int encoderID = 1;
 
-  RightEncoder() {}
+  RightEncoder() throws InterruptedException, IOException {}
 
   public static RightEncoder getInstance() {
     return instance;
@@ -19,7 +33,7 @@ public class RightEncoder extends Encoder {
   }
 
   @Override
-  public void writeToEncoder(Motion motion, int value) {
+  public void writeToEncoder(Motion motion, float value) throws IOException {
     motion.setRightSpeed((int) value);
   }
 }

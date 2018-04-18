@@ -5,8 +5,19 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.io.IOException;
 
 public class UltraSonicSensor {
-  private static UltraSonicSensor instance = new UltraSonicSensor();
-  private final com.dexterind.gopigo.components.UltraSonicSensor uss = new com.dexterind.gopigo.components.UltraSonicSensor();
+  private static UltraSonicSensor instance;
+
+    static {
+        try {
+            instance = new UltraSonicSensor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private final com.dexterind.gopigo.components.UltraSonicSensor uss = new com.dexterind.gopigo.components.UltraSonicSensor();
 
   UltraSonicSensor() throws IOException, InterruptedException {}
 
