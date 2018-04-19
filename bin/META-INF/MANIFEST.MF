@@ -1,0 +1,2 @@
+Main-Class: edu.oswego.csc436.Main
+Class-Path: GoPiGoLib.jar lib/pi4j-core.jar lib/pi4j-device.jar lib/pi4j-gpio-extension.jar lib/pi4j-service.jar
