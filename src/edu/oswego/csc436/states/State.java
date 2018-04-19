@@ -6,5 +6,5 @@ import edu.oswego.csc436.data.Data;
 import java.io.IOException;
 
 public abstract class State {
-  public abstract State update(float dt, Data data) throws IOException, BadSensorValueException;
+  public abstract State update(float dt, Data data) throws IOException;
 }

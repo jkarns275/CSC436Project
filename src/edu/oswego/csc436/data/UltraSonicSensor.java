@@ -11,9 +11,9 @@ public class UltraSonicSensor {
         try {
             instance = new UltraSonicSensor();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
 

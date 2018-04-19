@@ -13,9 +13,9 @@ public class RightEncoder extends Encoder {
     try {
       instance = new RightEncoder();
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
     } catch (IOException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
     }
   }
 

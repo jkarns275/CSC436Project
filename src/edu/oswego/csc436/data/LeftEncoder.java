@@ -13,9 +13,9 @@ public class LeftEncoder extends Encoder {
     try {
       instance = new LeftEncoder();
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
     } catch (IOException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
     }
   }
 
