@@ -1,0 +1,2 @@
+class BadSensorValueError(Exception):
+    pass
