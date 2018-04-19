@@ -21,7 +21,7 @@ public class RightEncoder extends Encoder {
 
   private final int encoderID = 1;
 
-  RightEncoder() throws InterruptedException, IOException {}
+  private RightEncoder() throws InterruptedException, IOException {}
 
   public static RightEncoder getInstance() {
     return instance;

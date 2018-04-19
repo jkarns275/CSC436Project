@@ -21,7 +21,7 @@ public class LeftEncoder extends Encoder {
 
   private final int encoderID = 0;
 
-  LeftEncoder() throws InterruptedException, IOException {}
+  private LeftEncoder() throws InterruptedException, IOException {}
 
   public static LeftEncoder getInstance() {
     return instance;
