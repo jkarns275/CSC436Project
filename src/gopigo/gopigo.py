@@ -290,7 +290,7 @@ def trim_test(value):
 #Read the trim value in	EEPROM if present else return -3
 def trim_read():
 	write_i2c_block(address,trim_read_cmd+[0,0,0])
-	time.sleep(.08)
+	time.sleep(.008)
 	try:
 		b1=bus.read_byte(address)
 		b2=bus.read_byte(address)
@@ -330,7 +330,7 @@ def trim_write(value):
 def digitalRead(pin):
 	if pin ==10 or pin ==15 or pin ==0 or pin ==1:
 		write_i2c_block(address, digital_read_cmd + [pin, unused, unused])
-		time.sleep(.1)
+		time.sleep(.01)
 		n=bus.read_byte(address)
 		bus.read_byte(address)		#Empty the buffer
 		return n
@@ -385,7 +385,7 @@ def analogWrite(pin, value):
 #	return:	voltage in V
 def volt():
 	write_i2c_block(address,volt_cmd+[0,0,0])
-	time.sleep(.1)
+	time.sleep(.01)
 	try:
 		b1=bus.read_byte(address)
 		b2=bus.read_byte(address)
@@ -403,7 +403,7 @@ def volt():
 #	return:	voltage in V
 def brd_rev():
 	write_i2c_block(address, analog_read_cmd + [7, unused, unused])
-	time.sleep(.1)
+	time.sleep(.01)
 	try:
 		b1=bus.read_byte(address)
 		b2=bus.read_byte(address)
@@ -557,7 +557,7 @@ def enc_read(motor):
 	end_read(1) # right
 	"""
 	write_i2c_block(address,enc_read_cmd+[motor,0,0])
-	time.sleep(.08)
+	time.sleep(.008)
 	try:
 		b1=bus.read_byte(address)
 		b2=bus.read_byte(address)

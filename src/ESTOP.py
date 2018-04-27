@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from constants import Constants
 from gopigo.gopigo import *
 from data import *
@@ -9,14 +8,19 @@ from data.timer import Timer
 
 import signal
 import sys
-import time
 
 def signal_handler(_signal, _frame):
     print("Goodbye!\n")
-    stop()    
+    data = Data.get_instance()
+    data.set_target_speed(0.0)
+    data.write_speed()
+    stop()
     sys.exit(0)
 
 if __name__ == '__main__':
+    signal_handler(None, None)
+    
+    '''
     data = Data.get_instance()
     state = Alert.get_instance()
 
@@ -25,8 +29,6 @@ if __name__ == '__main__':
 
     timer = Timer()
 
-    signal.signal(signal.SIGINT, signal_handler)
-    fwd()
     while True:
         try:
             print(state)
@@ -34,10 +36,10 @@ if __name__ == '__main__':
             if dt < Constants.CYCLE_MIN_PERIOD:
                 time.sleep(Constants.CYCLE_MIN_PERIOD - dt)
             dt = timer.get_dt()
-            print("Time: ", dt)
+            print("dt: ", dt)
             data.update(dt)
             state = state.update(dt, data)
             data.write_speed()
         except Exception as e:
             sys.stderr.write(str(e))
-	    signal_handler(None, None)
+    '''

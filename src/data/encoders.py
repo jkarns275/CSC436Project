@@ -1,5 +1,6 @@
 from constants import Constants
 from gopigo import *
+import time
 
 class Encoder:
     def __init__(self):
@@ -15,11 +16,13 @@ class Encoder:
         enc_tgt(0, 0, 0)
 
     def write_speed(self, value):
+        print("Speed: ", value)
         id = self.get_id()
-        if id == Constants.LEFT_MOTOR:
+        if id == Constants.LEFT_MOTOR:            
             set_left_speed(value)
         else:
             set_right_speed(value)
+        time.sleep(0.005)
 
     def get_id(self):
         raise Exception("This method should be overridden!")
@@ -43,7 +46,7 @@ class RightEncoder(Encoder):
     @staticmethod
     def get_instance():
         if RightEncoder._instance == None:
-            RightEncoder._instance = LeftEncoder()
+            RightEncoder._instance = RightEncoder()
         return RightEncoder._instance
 
     def __init__(self):

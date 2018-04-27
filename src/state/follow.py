@@ -1,13 +1,14 @@
 import sys
 
+import gopigo.gopigo
 from state import State
 from data.bad_sensor_value import BadSensorValueError
 from constants import Constants
 
 # MG2.1, D1.21
-from state.emergency import Emergency
-from state.leader import Leader
-from state.stop import Stop
+import emergency
+import leader
+import stop
 
 
 class Follow(State):
@@ -21,21 +22,22 @@ class Follow(State):
 
     def update(self, dt, data):
         try:
-
+            gopigo.fwd()
             # MF2.2.1
-            if data.objectDetected():
+            if data.object_detected():
                 self.consecutive_missing_object_cycles += 1
                 if self.consecutive_missing_object_cycles >= 5:
-                    return Leader.get_instance()
+                    return leader.Leader.get_instance()
             else:
                 self.consecutive_missing_object_cycles = 0
 
             uss_value = data.get_uss_value()
 
-            if uss_value < Constants.CRITICAL_DISTANCE:
-                return Emergency.get_instance()
-            if uss_value < Constants.STOP_DISTANCE:
-                return Stop.get_instance()
+            if uss_value < data.dynamic_critical_distance():
+                gopigo.stop()
+                return emergency.Emergency.get_instance()
+            if uss_value < data.dynamic_stop_distance():
+                return stop.Stop.get_instance()
 
             relative_speed = data.get_relative_speed()
             target_speed = data.get_target_speed()

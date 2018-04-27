@@ -3,8 +3,9 @@ import sys
 from state import State
 from data.bad_sensor_value import BadSensorValueError
 from constants import Constants
-from follow import Follow
-from leader import Leader
+import gopigo.gopigo
+import follow
+import leader
 
 
 class Alert(State):
@@ -16,15 +17,18 @@ class Alert(State):
 
     def update(self, dt, data):
         try:
-            data.set_speed(0.0)
-            if data.getUssValue() > Constants.STOP_DISTANCE:
+            gopigo.stop()
+            #data.set_speed(0.0)
+            if data.get_uss_value() > Constants.STOP_DISTANCE:
                 self.consecutive_no_leading_object_cycles = 0
-                return Follow.get_instance()
+                gopigo.fwd()
+                return follow.Follow.get_instance()
 
-            if not data.objectDetected():
+            if not data.object_detected():
                 self.consecutive_no_leading_object_cycles += 1
                 if self.consecutive_no_leading_object_cycles >= 5:
-                    return Leader.get_instance()
+                    gopigo.fwd()
+                    return leader.Leader.get_instance()
             else:
                 self.consecutive_no_leading_object_cycles = 0
 
